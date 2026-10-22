@@ -1,0 +1,1151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #fff;
+    color: #111;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+:root {
+    --black: #111;
+    --white: #fff;
+    --gray: #777;
+    --light-gray: #d8d8d3;
+}
+
+.mono {
+    font-family: "DM Mono", monospace;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+    height: 64px;
+
+    background: #111;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 4vw;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+.logo,
+.footer-logo {
+    width: 34px;
+    height: 34px;
+
+    border: 2px solid white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a,
+.socials a {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+
+    opacity: .75;
+
+    transition: .3s;
+}
+
+.nav-links a {
+    font-size: 14px;
+}
+
+.nav-links a:hover,
+.socials a:hover {
+    opacity: 1;
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.socials a {
+    font-size: 17px;
+}
+
+.socials svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+}
+
+.resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 10px 20px;
+
+    border: 2px solid #fff;
+    border-radius: 50px;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 16px;
+    
+
+    transition: all 0.3s ease;
+}
+
+.download-icon{
+    font-size: 22px;
+    line-height: 18px;
+}
+.resume-btn:hover {
+    background: #fff;
+    color: black;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: 92%;
+    max-width: 1400px;
+    min-height: 650px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    position: relative;
+    column-gap: 20px;
+}
+
+.hero-side {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-left {
+    padding-left: 8%;
+    padding-right: 0;
+}
+.hero-right {
+    padding-left: o;
+    padding-right: 8%;
+}
+
+.hero-side h1 {
+    font-size: clamp(48px, 5vw, 78px);
+    line-height: .9;
+    letter-spacing: -4px;
+    font-weight: 900;
+}
+
+.hero-side p {
+    max-width: 250px;
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--gray);
+}
+
+.hero-image {
+    width: 100%;
+    height: 650px;
+    min-height: 500px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.portrait {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center bottom;
+    border-radius: 0;
+    mix-blend-mode: multiply;
+}
+
+.code-bg {
+    position: absolute;
+    right: 0;
+    bottom: 80px;
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #d5d5d5;
+    z-index: -1;
+}
+
+.hero-bottom {
+    position: absolute;
+
+    bottom: 30px;
+
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    color: #777;
+}
+
+.hero-bottom::before,
+.hero-bottom::after {
+    content: "";
+
+    height: 1px;
+
+    background: var(--light-gray);
+
+    width: 25%;
+}
+
+
+/* =========================
+   GENERAL SECTION
+========================= */
+
+.section {
+    width: 92%;
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 120px 0;
+}
+
+.section-number {
+    font-family: "DM Mono", monospace;
+
+    font-size: 10px;
+
+    color: #888;
+
+    margin-bottom: 25px;
+}
+
+.section-heading {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 60px;
+}
+
+.section-heading h2,
+.big-title {
+    font-size: clamp(50px, 7vw, 100px);
+
+    line-height: .85;
+
+    letter-spacing: -5px;
+
+    font-weight: 900;
+}
+
+.section-heading p {
+    width: 250px;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    color: #777;
+}
+
+
+/* =========================
+   SELECTED WORK
+========================= */
+
+.project-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+}
+
+
+/*
+   IMPORTANT:
+   Every project card is the same size.
+*/
+
+.project-card {
+
+    border: 1px solid var(--light-gray);
+
+    background: #f7f7f5;
+
+    transition: .3s;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+}
+
+
+/*
+   SAME IMAGE SIZE
+*/
+
+.project-image {
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 15px;
+
+    color: white;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 10px;
+}
+
+
+/* Temporary project backgrounds */
+
+.project-one {
+    background: linear-gradient(
+        135deg,
+        #222,
+        #777
+    );
+}
+
+.project-two {
+    background: linear-gradient(
+        135deg,
+        #ddd,
+        #777
+    );
+}
+
+.project-three {
+    background: linear-gradient(
+        135deg,
+        #444,
+        #aaa
+    );
+}
+
+.project-four {
+    background: linear-gradient(
+        135deg,
+        #d2c0ac,
+        #333
+    );
+}
+
+
+.project-info {
+
+    padding: 22px;
+
+    min-height: 185px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.project-info h3 {
+    font-size: 18px;
+}
+
+.project-type {
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    color: #777;
+
+    margin-top: 6px;
+}
+
+.project-description {
+    font-size: 11px;
+
+    color: #777;
+
+    line-height: 1.5;
+
+    max-width: 400px;
+}
+
+.project-info a {
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    margin-top: 15px;
+
+    width: fit-content;
+
+    border-bottom: 1px solid #111;
+
+    padding-bottom: 4px;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+.about-text h2 {
+
+    font-size: clamp(50px, 7vw, 100px);
+
+    line-height: .85;
+
+    letter-spacing: -5px;
+    font-weight: 900;
+
+    margin-bottom: 35px;
+}
+
+.about-text > p {
+
+    max-width: 550px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color: #555;
+
+    margin-bottom: 15px;
+}
+
+.details {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 25px;
+
+    margin-top: 50px;
+}
+
+.details span {
+
+    display: block;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    color: #888;
+
+    margin-bottom: 8px;
+}
+
+.details strong {
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+.about-image {
+
+    width: 400px;
+    aspect-ratio: 2/3;
+    max-width: 470px;
+    height: auto;
+    margin-inline: auto;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+.big-title {
+
+    margin-bottom: 60px;
+}
+
+.skills-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.skill-card {
+
+    border: 1px solid var(--light-gray);
+
+    min-height: 330px;
+
+    padding: 30px;
+
+    transition: .3s;
+}
+
+.skill-card:hover {
+
+    background: #111;
+
+    color: white;
+
+    transform: translateY(-5px);
+}
+
+.skill-number {
+
+    font-size: 60px;
+
+    font-weight: 800;
+
+    letter-spacing: -5px;
+}
+
+.skill-card h3 {
+
+    font-size: 15px;
+
+    margin: 25px 0;
+}
+
+.skill-card ul {
+
+    list-style: none;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 10px;
+
+    line-height: 2;
+}
+
+.skill-card li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-card li i {
+    width: 14px;
+    text-align: center;
+    font-size: 12px;
+    color: inherit;
+}
+
+
+/* =========================
+   SPECIAL PROJECT
+========================= */
+
+.special-project {
+
+    width: 100%;
+
+    background: #111;
+
+    color: white;
+
+    padding: 120px 4vw;
+}
+
+.special-project .section-number {
+    color: #888;
+}
+
+.special-grid {
+
+    display: grid;
+
+    grid-template-columns: 1.2fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+.special-content h2 {
+
+    font-size: clamp(50px, 7vw, 100px);
+
+    line-height: .82;
+
+    letter-spacing: -5px;
+
+    margin: 25px 0;
+}
+
+.special-content > p {
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    max-width: 500px;
+}
+
+.special-description {
+    margin-bottom: 30px;
+}
+
+.special-image {
+
+    aspect-ratio: 1 / 1;
+
+    background: linear-gradient(
+        135deg,
+        #777,
+        #222
+    );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 10px;
+
+    color: #aaa;
+}
+
+.button {
+
+    display: inline-block;
+
+    padding: 14px 20px;
+
+    background: white;
+
+    color: #111;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    margin-top: 10px;
+}
+
+.special-details {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 70px;
+
+    border-top: 1px solid #444;
+}
+
+.special-details div {
+
+    padding: 20px;
+
+    border-right: 1px solid #444;
+}
+
+.special-details span {
+
+    display: block;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 8px;
+
+    color: #777;
+
+    margin-bottom: 10px;
+}
+
+.special-details strong {
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   PERSONAL
+========================= */
+
+.personal {
+
+    width: 100%;
+
+    background: #e8e3dc;
+
+    padding: 120px 4vw;
+}
+
+.personal-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    margin-top: 50px;
+}
+
+.personal-text {
+
+    padding: 50px 0;
+}
+
+.personal-text h2 {
+
+    font-size: clamp(45px, 6vw, 80px);
+
+    line-height: .85;
+
+    letter-spacing: -5px;
+}
+
+.personal-text p {
+
+    max-width: 450px;
+
+    margin-top: 35px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #666;
+}
+
+.personal-image {
+
+    min-height: 450px;
+
+    background: #aaa;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 10px;
+
+    color: #555;
+}
+
+.interests {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 50px;
+}
+
+.interests div {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-top: 1px solid #bbb;
+
+    font-size: 20px;
+}
+
+.interests span {
+
+    display: block;
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact {
+
+    min-height: 600px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.contact-grid {
+
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+.contact-grid h2 {
+
+    font-size: clamp(60px, 9vw, 140px);
+
+    line-height: .78;
+
+    letter-spacing: -8px;
+
+    font-weight: 900;
+    color: #111;
+}
+
+.highlight-word {
+    color: #f5d742;
+}
+
+.contact-info p {
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.email {
+
+    display: block;
+
+    width: fit-content;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid #111;
+
+    padding-bottom: 8px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    background: #111;
+
+    color: white;
+
+    padding: 35px 4vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+footer p {
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    color: #aaa;
+
+    margin-top: 10px;
+}
+
+.footer-logo {
+
+    margin-bottom: 10px;
+}
+
+.footer-links {
+
+    display: flex;
+
+    gap: 25px;
+}
+
+.footer-links a {
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    color: #aaa;
+}
+
+.copyright {
+
+    font-family: "DM Mono", monospace;
+
+    font-size: 9px;
+
+    color: #777;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        padding: 70px 0;
+    }
+
+    .hero-side p {
+        margin: 15px auto;
+    }
+
+    .hero-image {
+
+        height: 450px;
+
+        order: 2;
+    }
+
+    .hero-side:first-child {
+        order: 1;
+    }
+
+    .hero-side:last-child {
+        order: 3;
+    }
+
+    .project-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid,
+    .special-grid,
+    .personal-grid,
+    .contact-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .special-details {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .interests {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .section-heading {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 30px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 550px) {
+
+    .section,
+    .special-project,
+    .personal {
+
+        padding: 80px 6vw;
+    }
+
+    .hero {
+
+        width: 88%;
+    }
+
+    .hero-image {
+        height: 430px;
+    }
+
+    .portrait {
+        width: 100%;
+    }
+
+    .hero-side h1 {
+
+        font-size: 45px;
+    }
+
+    .skills-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .details {
+
+        grid-template-columns: 1fr;
+    }
+
+    .special-details {
+
+        grid-template-columns: 1fr;
+    }
+
+    .special-details div {
+
+        border-right: none;
+
+        border-bottom: 1px solid #444;
+    }
+
+    .interests {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    footer {
+
+        flex-direction: column;
+
+        gap: 30px;
+
+        text-align: center;
+    }
+
+    .footer-logo {
+
+        margin: auto;
+    }
+
+    .section-heading h2,
+    .big-title {
+
+        letter-spacing: -3px;
+    }
+
+}
