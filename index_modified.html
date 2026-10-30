@@ -6,6 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Samrat Anand | Designer × Coder</title>
+    <meta name="description"
+        content="Portfolio of Samrat Anand — UI/UX designer, front-end developer and B.Tech AIML student from India.">
+    <meta name="author" content="Samrat Anand">
+    <meta name="theme-color" content="#111111">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Samrat Anand | Designer × Coder">
+    <meta property="og:description"
+        content="UI/UX design, front-end development and AI/ML — selected work and projects.">
+    <meta property="og:image" content="samrat.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='34' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Samrat Anand",
+        "jobTitle": "UI/UX Designer & Front-end Developer",
+        "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+        "sameAs": [
+            "https://x.com/Yourxsamrat",
+            "https://www.linkedin.com/in/samrat-anand-4928663a1/",
+            "https://www.instagram.com/yourxsamrat/"
+        ]
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,19 +50,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
 </head>
 
 
 <body>
 
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="scroll-progress" aria-hidden="true"></div>
+
     <!-- =========================
          NAVBAR
     ========================== -->
 
-    <nav>
+    <nav aria-label="Primary">
 
-        <a href="#" class="logo">
+        <a href="#" class="logo" aria-label="Back to top">
             S
         </a>
 
@@ -57,7 +93,23 @@
             </a>
         </div>
 
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false"
+            aria-controls="mobile-menu">
+            <span></span><span></span><span></span>
+        </button>
+
     </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="#about">about</a>
+        <a href="#work">work</a>
+        <a href="#skills">skills</a>
+        <a href="#contact">contact</a>
+        <a href="resume.pdf" download>resume ↓</a>
+    </div>
+
+    <main id="main">
 
 
 
@@ -85,7 +137,7 @@
 
         <div class="hero-image">
 
-            <img class="portrait" src="samrat.png" alt="Samrat Anand">
+            <img class="portrait" src="samrat.png" alt="Samrat Anand" fetchpriority="high" decoding="async">
 
             <div class="code-bg">
                 &lt;html&gt;<br>
@@ -121,6 +173,19 @@
     </section>
 
 
+    <!-- =========================
+         MARQUEE
+    ========================== -->
+
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>UI / UX</span><span>✦</span><span>FIGMA</span><span>✦</span><span>HTML</span><span>✦</span><span>CSS</span><span>✦</span><span>JAVASCRIPT</span><span>✦</span><span>PYTHON</span><span>✦</span><span>C++</span><span>✦</span><span>MACHINE LEARNING</span><span>✦</span><span>COMPUTER VISION</span><span>✦</span>
+            <span>UI / UX</span><span>✦</span><span>FIGMA</span><span>✦</span><span>HTML</span><span>✦</span><span>CSS</span><span>✦</span><span>JAVASCRIPT</span><span>✦</span><span>PYTHON</span><span>✦</span><span>C++</span><span>✦</span><span>MACHINE LEARNING</span><span>✦</span><span>COMPUTER VISION</span><span>✦</span>
+        </div>
+    </div>
+
+
+
 
     <!-- =========================
          SELECTED WORK
@@ -132,7 +197,7 @@
             01 — SELECTED WORK
         </div>
 
-        <div class="section-heading">
+        <div class="section-heading reveal">
 
             <h2>
                 SELECTED<br>
@@ -146,6 +211,16 @@
 
         </div>
 
+        <!-- FILTERS -->
+
+        <div class="filters reveal" role="group" aria-label="Filter projects">
+            <button class="filter-btn active" data-filter="all" aria-pressed="true">ALL</button>
+            <button class="filter-btn" data-filter="design" aria-pressed="false">DESIGN</button>
+            <button class="filter-btn" data-filter="web" aria-pressed="false">WEB</button>
+            <button class="filter-btn" data-filter="ai" aria-pressed="false">AI / ML</button>
+        </div>
+
+
 
         <!-- ALL CARDS SAME SIZE -->
 
@@ -154,7 +229,7 @@
 
             <!-- PROJECT 1 -->
 
-            <article class="project-card">
+            <article class="project-card reveal" data-category="design web">
 
                 <div class="project-image project-one">
                     <span>01</span>
@@ -185,7 +260,7 @@
 
             <!-- PROJECT 2 -->
 
-            <article class="project-card">
+            <article class="project-card reveal" data-category="ai">
 
                 <div class="project-image project-two">
                     <span>02</span>
@@ -216,7 +291,7 @@
 
             <!-- PROJECT 3 -->
 
-            <article class="project-card">
+            <article class="project-card reveal" data-category="web">
 
                 <div class="project-image project-three">
                     <span>03</span>
@@ -247,7 +322,7 @@
 
             <!-- PROJECT 4 -->
 
-            <article class="project-card">
+            <article class="project-card reveal" data-category="design">
 
                 <div class="project-image project-four">
                     <span>04</span>
@@ -276,6 +351,8 @@
 
         </div>
 
+        <p id="project-empty" class="project-empty" hidden>No projects in this category yet.</p>
+
     </section>
 
 
@@ -286,12 +363,12 @@
 
     <section id="about" class="section">
 
-        <div class="section-number">
+        <div class="section-number reveal">
             02 — ABOUT
         </div>
 
 
-        <div class="about-grid">
+        <div class="about-grid reveal">
 
             <div class="about-text">
 
@@ -341,7 +418,7 @@
 
 
             <div class="about-image">
-                <img src="samrat_about.png" alt="Samrat Anand portrait">
+                <img src="samrat_about.png" alt="Samrat Anand portrait" loading="lazy" decoding="async">
             </div>
 
         </div>
@@ -366,7 +443,7 @@
         </h2>
 
 
-        <div class="skills-grid">
+        <div class="skills-grid reveal">
 
 
             <div class="skill-card">
@@ -378,7 +455,7 @@
                 <h3>DESIGN</h3>
 
                 <ul>
-                    <li><i class="fa-brands fa-figma"></i> UI / UX</li>
+                    <li><i class="fa-solid fa-object-group"></i> UI / UX</li>
                     <li><i class="fa-brands fa-figma"></i> Figma</li>
                     <li><i class="fa-solid fa-pen-ruler"></i> Prototyping</li>
                     <li><i class="fa-solid fa-palette"></i> Visual Design</li>
@@ -444,7 +521,7 @@
         </div>
 
 
-        <div class="special-grid">
+        <div class="special-grid reveal">
 
             <div class="special-content">
 
@@ -471,7 +548,7 @@
 
 
             <div class="special-image">
-                <img src="sih.png" alt="Sih image" >
+                <img src="sih.png" alt="Smart India Hackathon adaptive noise cancellation project" loading="lazy" decoding="async">
             </div>
 
         </div>
@@ -516,7 +593,7 @@
         </div>
 
 
-        <div class="personal-grid">
+        <div class="personal-grid reveal">
 
             <div class="personal-text">
 
@@ -580,7 +657,7 @@
         </div>
 
 
-        <div class="contact-grid">
+        <div class="contact-grid reveal">
 
             <h2>
                 LET'S<br>
@@ -596,23 +673,58 @@
                     work together?
                 </p>
 
-                <a
-                    href="mailto:your@email.com"
-                    class="email">
-                    your@email.com
-                </a>
+                <div class="email-row">
+                    <a
+                        href="mailto:your@email.com"
+                        class="email">
+                        your@email.com
+                    </a>
 
-                <a
-                    href="mailto:your@email.com"
-                    class="button">
-                    EMAIL ME →
-                </a>
+                    <button type="button" id="copy-email" class="copy-btn" data-email="your@email.com"
+                        aria-label="Copy email address">
+                        <i class="fa-regular fa-copy"></i> COPY
+                    </button>
+                </div>
+
+                <form id="contact-form" class="contact-form" data-to="your@email.com" novalidate>
+
+                    <div class="field">
+                        <label for="cf-name">NAME</label>
+                        <input id="cf-name" name="name" type="text" autocomplete="name" required
+                            aria-describedby="cf-name-error">
+                        <small id="cf-name-error" class="field-error" role="alert"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="cf-email">EMAIL</label>
+                        <input id="cf-email" name="email" type="email" autocomplete="email" required
+                            aria-describedby="cf-email-error">
+                        <small id="cf-email-error" class="field-error" role="alert"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="cf-message">MESSAGE</label>
+                        <textarea id="cf-message" name="message" rows="4" required
+                            aria-describedby="cf-message-error"></textarea>
+                        <small id="cf-message-error" class="field-error" role="alert"></small>
+                    </div>
+
+                    <button type="submit" class="button submit-btn">SEND MESSAGE →</button>
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+
+                </form>
+
+                <p class="local-time mono">
+                    LOCAL TIME · <span id="local-time">--:--</span>
+                </p>
 
             </div>
 
         </div>
 
     </section>
+
+    </main>
 
 
 
@@ -625,7 +737,7 @@
         <div>
 
             <div class="footer-logo">
-                A
+                S
             </div>
 
             <p>
@@ -639,17 +751,20 @@
         <div class="footer-links">
 
             <a href="#">GitHub</a>
-            <a href="https://www.linkedin.com/in/samrat-anand-4928663a1/" target="_blank" aria-label="LinkedIn"">LinkedIn</a>
-            <a href="https://www.instagram.com/yourxsamrat/" target="_blank ">Instagram</a>
+            <a href="https://www.linkedin.com/in/samrat-anand-4928663a1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/yourxsamrat/" target="_blank" rel="noopener noreferrer">Instagram</a>
 
         </div>
 
 
         <div class="copyright">
-            © 2026
+            © <span id="year">2026</span>
         </div>
 
     </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 
 </body>

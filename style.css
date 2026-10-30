@@ -169,7 +169,7 @@ nav {
     padding-right: 0;
 }
 .hero-right {
-    padding-left: o;
+    padding-left: 0;
     padding-right: 8%;
 }
 
@@ -1148,4 +1148,587 @@ footer p {
         letter-spacing: -3px;
     }
 
+}
+
+
+
+
+/* =========================================================
+   UPGRADES
+   ========================================================= */
+
+/* ---------- Accessibility ---------- */
+
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -60px;
+    z-index: 300;
+
+    background: #fff;
+    color: #111;
+
+    padding: 10px 16px;
+    border-radius: 6px;
+
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+
+    transition: top .2s;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
+:focus-visible {
+    outline: 2px solid #f5d742;
+    outline-offset: 3px;
+}
+
+/* ---------- Scroll progress ---------- */
+
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 3px;
+    width: 0;
+
+    background: #f5d742;
+
+    z-index: 200;
+    pointer-events: none;
+}
+
+/* ---------- Active nav link ---------- */
+
+.nav-links a:not(.resume-btn) {
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-links a:not(.resume-btn)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: #f5d742;
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform .3s ease;
+}
+
+.nav-links a.active,
+.nav-links a:not(.resume-btn):hover {
+    opacity: 1;
+}
+
+.nav-links a.active::after,
+.nav-links a:not(.resume-btn):hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Hamburger + mobile menu ---------- */
+
+.menu-toggle {
+    display: none;
+
+    width: 40px;
+    height: 40px;
+
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+
+    width: 22px;
+    height: 2px;
+
+    background: #fff;
+
+    transition: transform .3s ease, opacity .2s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 99;
+
+    background: #111;
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 0 8vw;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+
+    transition: opacity .3s ease, transform .3s ease, visibility .3s;
+}
+
+.mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.mobile-menu a {
+    font-size: clamp(40px, 12vw, 64px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1.1;
+
+    opacity: .55;
+
+    transition: opacity .2s, padding-left .2s;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active {
+    opacity: 1;
+    padding-left: 10px;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee {
+    overflow: hidden;
+
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+
+    padding: 16px 0;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 36px;
+    width: max-content;
+
+    animation: marquee 40s linear infinite;
+}
+
+.marquee-track span {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    white-space: nowrap;
+
+    color: #555;
+}
+
+.marquee-track span:nth-child(even) {
+    color: #f5d742;
+}
+
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ---------- Reveal on scroll ---------- */
+
+.js .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+
+    transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.js .reveal.in {
+    opacity: 1;
+    transform: none;
+}
+
+.js .project-card.reveal:nth-child(2) { transition-delay: .08s, .08s; }
+.js .project-card.reveal:nth-child(3) { transition-delay: .16s, .16s; }
+.js .project-card.reveal:nth-child(4) { transition-delay: .24s, .24s; }
+
+/* keep card hover snappy once revealed */
+.js .project-card.reveal.in {
+    transition: opacity .8s ease, transform .3s ease;
+}
+
+/* ---------- Project filters ---------- */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 35px;
+}
+
+.filter-btn {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+
+    padding: 10px 18px;
+
+    background: transparent;
+    color: #111;
+
+    border: 1px solid var(--light-gray);
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    transition: background .25s, color .25s, border-color .25s;
+}
+
+.filter-btn:hover {
+    border-color: #111;
+}
+
+.filter-btn.active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.project-card[hidden] {
+    display: none;
+}
+
+.project-empty {
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+    color: #777;
+
+    padding: 40px 0;
+}
+
+/* ---------- Project card polish ---------- */
+
+.project-card {
+    overflow: hidden;
+}
+
+.project-card:hover {
+    border-color: #111;
+}
+
+.project-info a {
+    transition: letter-spacing .25s, color .25s, border-color .25s;
+}
+
+.project-info a:hover {
+    letter-spacing: 1px;
+    color: #b89b00;
+    border-color: #b89b00;
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+    transition: transform .25s, background .25s, color .25s, box-shadow .25s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .2);
+}
+
+/* the contact section has a white page, so the button there is dark */
+.contact .button {
+    background: #111;
+    color: #fff;
+
+    border: 0;
+    cursor: pointer;
+}
+
+.contact .button:hover {
+    background: #f5d742;
+    color: #111;
+}
+
+/* ---------- Contact ---------- */
+
+.email-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 30px;
+}
+
+.email-row .email {
+    margin-bottom: 0;
+}
+
+.copy-btn {
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    padding: 8px 12px;
+
+    background: transparent;
+    color: #111;
+
+    border: 1px solid var(--light-gray);
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    transition: background .25s, color .25s;
+}
+
+.copy-btn:hover {
+    background: #111;
+    color: #fff;
+}
+
+.contact-form {
+    display: grid;
+    gap: 18px;
+}
+
+.field label {
+    display: block;
+
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    color: #888;
+
+    margin-bottom: 6px;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+
+    font: inherit;
+    font-size: 14px;
+    color: #111;
+
+    background: transparent;
+
+    border: 0;
+    border-bottom: 1px solid #bbb;
+    border-radius: 0;
+
+    padding: 8px 0;
+
+    resize: vertical;
+
+    transition: border-color .25s;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #111;
+}
+
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+    border-color: #d33;
+}
+
+.field-error {
+    display: block;
+    min-height: 14px;
+
+    margin-top: 4px;
+
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    color: #d33;
+}
+
+.submit-btn {
+    justify-self: start;
+    padding: 16px 24px;
+}
+
+.form-status {
+    font-family: "DM Mono", monospace;
+    font-size: 10px;
+    color: #777;
+
+    min-height: 14px;
+    margin: 0;
+}
+
+.contact-info .local-time {
+    margin: 30px 0 0;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+/* ---------- Back to top + toast ---------- */
+
+.back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+    border: 0;
+
+    background: #111;
+    color: #fff;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    z-index: 90;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+
+    transition: opacity .3s, transform .3s, visibility .3s, background .25s, color .25s;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.back-to-top:hover {
+    background: #f5d742;
+    color: #111;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+
+    transform: translate(-50%, 20px);
+
+    background: #111;
+    color: #fff;
+
+    font-family: "DM Mono", monospace;
+    font-size: 12px;
+
+    padding: 12px 20px;
+    border-radius: 50px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    z-index: 250;
+
+    transition: opacity .3s, transform .3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* ---------- Responsive additions ---------- */
+
+@media (max-width: 900px) {
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    .socials {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .socials {
+        display: none;
+    }
+
+    .menu-toggle {
+        margin-left: auto;
+    }
+
+    .back-to-top {
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+    }
+
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+    }
 }
