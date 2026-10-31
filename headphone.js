@@ -24,6 +24,10 @@
     const THREE = window.THREE;
     const gsap = window.gsap;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Phones / tablets / touch screens: lighter rendering + touch interaction.
+    const touchQuery = window.matchMedia("(pointer: coarse)");
+    const liteQuery = window.matchMedia("(max-width: 900px), (pointer: coarse)");
+    const isTouch = touchQuery.matches;
 
     const CONFIG = {
         modelUrl: (stage.dataset.model || "").trim(), // optional .glb/.gltf
@@ -59,7 +63,9 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(28, 16 / 9, 0.1, 60);
-    camera.position.set(0, 0.35, 7.6);
+    const CAM_Z = 7.6;
+    const CAM_HALF_WIDTH = 2.15;   // half-width (scene units) that must always stay in frame
+    camera.position.set(0, 0.35, CAM_Z);
     camera.lookAt(0, -0.05, 0);
 
     /* ---------- Studio environment (procedural softboxes -> PMREM) ---------- */
@@ -98,7 +104,7 @@
     const key = new THREE.DirectionalLight(0xfff0e0, 1.5);
     key.position.set(-3.5, 5.5, 5);
     key.castShadow = true;
-    key.shadow.mapSize.set(1024, 1024);
+    key.shadow.mapSize.setScalar(liteQuery.matches ? 512 : 1024);
     key.shadow.camera.left = -3.2; key.shadow.camera.right = 3.2;
     key.shadow.camera.top = 3.2; key.shadow.camera.bottom = -3.2;
     key.shadow.camera.near = 1; key.shadow.camera.far = 16;
@@ -373,7 +379,11 @@
         return raycaster.intersectObject(hitMesh, false).length > 0;
     }
     hotspot.addEventListener("pointermove", (e) => setHover(updatePointer(e)));
-    hotspot.addEventListener("pointerdown", (e) => { if (updatePointer(e)) { hovering = true; play(); } });
+    hotspot.addEventListener("pointerdown", (e) => {
+        const hit = updatePointer(e);
+        // A finger has no hover, so a touch anywhere on the stage counts as one
+        if (hit || e.pointerType === "touch") { hovering = true; play(); }
+    });
     hotspot.addEventListener("pointerleave", () => {
         hovering = false;
         hotspot.style.cursor = "default";
@@ -417,9 +427,14 @@
     function resize() {
         const w = stage.clientWidth || 1;
         const h = stage.clientHeight || 1;
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, liteQuery.matches ? 1.5 : 2));
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
+        // Narrow stages (phones): dolly back just enough to keep the whole headphone
+        // in frame. Wide stages resolve to CAM_Z, so desktop framing is unchanged.
+        const tanHalfFov = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+        camera.position.z = Math.max(CAM_Z, CAM_HALF_WIDTH / (tanHalfFov * camera.aspect));
+        camera.lookAt(0, -0.05, 0);
         camera.updateProjectionMatrix();
     }
     resize();
@@ -448,6 +463,25 @@
             if (entries[0].isIntersecting) start();
             else running = false; // don't render while off-screen
         }, { rootMargin: "120px" }).observe(stage);
+
+        if (isTouch) {
+            // No hover on touch screens: play the turn once when the stage is
+            // properly in view so the main effect is seen without any input.
+            const demo = new IntersectionObserver((entries) => {
+                if (!entries[0].isIntersecting) return;
+                demo.disconnect();
+                setTimeout(play, 700);
+            }, { threshold: 0.6 });
+            demo.observe(stage);
+
+            // Hint copy: "HOVER" -> "TAP"
+            const note = document.querySelector(".anc-copy-note");
+            if (note) {
+                note.childNodes.forEach((n) => {
+                    if (n.nodeType === 3) n.textContent = n.textContent.replace("HOVER", "TAP");
+                });
+            }
+        }
     } else {
         start();
     }

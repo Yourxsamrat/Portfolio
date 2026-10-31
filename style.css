@@ -1023,14 +1023,6 @@ footer p {
         order: 2;
     }
 
-    .hero-side:first-child {
-        order: 1;
-    }
-
-    .hero-side:last-child {
-        order: 3;
-    }
-
     .project-grid {
 
         grid-template-columns: 1fr;
@@ -1923,5 +1915,811 @@ body.menu-open {
 
     .anc-details div:nth-child(n + 3) {
         border-top: 1px solid rgba(190, 211, 255, .14);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE LAYER
+   Tablet + phone adaptation. Everything below is scoped to
+   max-width / touch media queries so the desktop layout
+   (> 900px, hover + mouse) is left exactly as designed.
+   ========================================================= */
+
+:root {
+    --gutter: clamp(20px, 6vw, 48px);
+    --nav-h: 64px;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Safety net: nothing may widen the page. `clip` (unlike `hidden`)
+   does not create a scroll container, so sticky/fixed UI is unaffected. */
+main {
+    overflow-x: clip;
+}
+
+video,
+canvas {
+    max-width: 100%;
+}
+
+/* the slide-down menu is a mobile-only component */
+.mobile-socials {
+    display: none;
+}
+
+@media (min-width: 901px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+
+/* ---------- TABLET + PHONE (<= 900px) ---------- */
+
+@media (max-width: 900px) {
+
+    html {
+        scroll-padding-top: var(--nav-h);
+    }
+
+    /* --- Navigation --- */
+
+    nav {
+        padding-inline: max(var(--gutter), env(safe-area-inset-left)) max(var(--gutter), env(safe-area-inset-right));
+    }
+
+    .logo {
+        position: relative;
+    }
+
+    .logo::after {
+        /* 34px glyph -> 44px tap area, no visual change */
+        content: "";
+        position: absolute;
+        inset: -5px;
+    }
+
+    .socials {
+        gap: 0;
+    }
+
+    .socials a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .menu-toggle {
+        width: 44px;
+        height: 44px;
+        margin-right: -11px;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-menu {
+        top: var(--nav-h);
+        padding: 24px max(var(--gutter), env(safe-area-inset-left)) calc(24px + env(safe-area-inset-bottom));
+        justify-content: safe center;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-menu a:active {
+        opacity: 1;
+    }
+
+    /* --- Hero --- */
+
+    .hero {
+        width: calc(100% - 2 * var(--gutter));
+        min-height: 0;
+        padding: clamp(36px, 8vw, 64px) 0 clamp(40px, 8vw, 56px);
+        row-gap: clamp(14px, 3vw, 24px);
+    }
+
+    .hero-left {
+        order: 1;
+    }
+
+    .hero-image {
+        order: 2;
+    }
+
+    .hero-right {
+        order: 3;
+    }
+
+    .hero-left,
+    .hero-right {
+        padding-inline: 0;
+    }
+
+    .hero-side h1 {
+        font-size: clamp(48px, 15vw, 84px);
+        letter-spacing: -.05em;
+    }
+
+    .hero-side p {
+        max-width: 32ch;
+        margin: 14px auto 0;
+        font-size: clamp(13px, 3.6vw, 15px);
+    }
+
+    .hero-image {
+        height: auto;
+        min-height: 0;
+        max-width: 640px;
+        margin-inline: auto;
+    }
+
+    .code-bg {
+        right: 0;
+        bottom: 1%;
+        font-size: clamp(9px, 2.8vw, 12px);
+    }
+
+    .hero-bottom {
+        position: static;
+        order: 4;
+        margin-top: 8px;
+        gap: 12px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        white-space: nowrap;
+    }
+
+    .hero-bottom::before,
+    .hero-bottom::after {
+        flex: 1;
+        width: auto;
+        min-width: 12px;
+    }
+
+    /* --- Marquee --- */
+
+    .marquee {
+        padding: 12px 0;
+    }
+
+    .marquee-track {
+        gap: 28px;
+        will-change: transform;
+    }
+
+    .marquee-track span {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    /* --- Shared section rhythm + headings --- */
+
+    .section {
+        width: 100%;
+        padding: clamp(64px, 13vw, 100px) var(--gutter);
+    }
+
+    .special-project,
+    .personal {
+        padding: clamp(64px, 13vw, 100px) var(--gutter);
+    }
+
+    .anc-section {
+        padding: clamp(64px, 12vw, 90px) var(--gutter) clamp(40px, 8vw, 64px);
+    }
+
+    .section-number {
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+
+    .section-heading h2,
+    .big-title,
+    .about-text h2 {
+        font-size: clamp(44px, 14vw, 88px);
+        letter-spacing: -.05em;
+        line-height: .88;
+    }
+
+    .section-heading {
+        margin-bottom: clamp(28px, 7vw, 44px);
+    }
+
+    .big-title {
+        margin-bottom: clamp(32px, 8vw, 48px);
+    }
+
+    .section-heading p {
+        width: auto;
+        max-width: 300px;
+        font-size: 14px;
+    }
+
+    /* --- Selected work --- */
+
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .filters {
+        margin-bottom: 28px;
+    }
+
+    .filter-btn {
+        min-height: 44px;
+        padding: 12px 18px;
+        font-size: 11px;
+    }
+
+    .project-image {
+        padding: 14px;
+        font-size: 11px;
+    }
+
+    .project-info {
+        min-height: 170px;
+        padding: 20px;
+    }
+
+    .project-type {
+        font-size: 10.5px;
+    }
+
+    .project-description {
+        font-size: 13px;
+    }
+
+    .project-info a {
+        position: relative;
+        font-size: 11px;
+    }
+
+    .project-info a::before {
+        /* enlarge the tap area without moving the underline */
+        content: "";
+        position: absolute;
+        inset: -14px -10px;
+    }
+
+    .project-empty {
+        font-size: 13px;
+    }
+
+    /* --- About --- */
+
+    .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+    }
+
+    .about-text > p {
+        max-width: 560px;
+        font-size: 15px;
+    }
+
+    .about-text h2 {
+        margin-bottom: 24px;
+    }
+
+    .details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px 16px;
+        margin-top: 36px;
+    }
+
+    .details span {
+        font-size: 10px;
+    }
+
+    .details strong {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .about-image {
+        width: min(100%, 400px);
+        aspect-ratio: auto;
+    }
+
+    /* --- Skills --- */
+
+    .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .skill-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .skill-card {
+        min-height: 0;
+        padding: 26px;
+    }
+
+    .skill-number {
+        font-size: 48px;
+    }
+
+    .skill-card h3 {
+        margin: 18px 0;
+        font-size: 16px;
+    }
+
+    .skill-card ul {
+        font-size: 12px;
+    }
+
+    .skill-card li i {
+        font-size: 13px;
+    }
+
+    /* --- Special project (headphone) --- */
+
+    .anc-copy h2 {
+        font-size: clamp(40px, 13vw, 78px);
+    }
+
+    .anc-kicker {
+        font-size: 11px;
+    }
+
+    .anc-intro {
+        max-width: 460px;
+        font-size: 14px;
+    }
+
+    .anc-story {
+        display: block;
+        margin: 28px auto 0;
+    }
+
+    .anc-copy {
+        margin-bottom: 24px;
+    }
+
+    .anc-copy-note {
+        display: block;
+        margin-top: 20px;
+        font-size: 10px;
+    }
+
+    .anc-stage {
+        aspect-ratio: 16 / 10;
+    }
+
+    .anc-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 28px;
+    }
+
+    .anc-details div {
+        padding: 16px;
+        border-bottom: 0;
+    }
+
+    .anc-details div:nth-child(even) {
+        border-right: 0;
+    }
+
+    .anc-details div:nth-child(n + 3) {
+        border-top: 1px solid rgba(190, 211, 255, .14);
+    }
+
+    .anc-details span {
+        font-size: 10px;
+    }
+
+    .anc-details strong {
+        font-size: 12px;
+    }
+
+    /* --- Personal --- */
+
+    .personal-grid {
+        grid-template-columns: minmax(0, 1fr);
+        margin-top: 24px;
+    }
+
+    .personal-text {
+        padding: 24px 0 32px;
+    }
+
+    .personal-text h2 {
+        font-size: clamp(38px, 12vw, 72px);
+        letter-spacing: -.05em;
+    }
+
+    .personal-text p {
+        max-width: 460px;
+        margin-top: 24px;
+        font-size: 14px;
+    }
+
+    .personal-image {
+        min-height: 0;
+        aspect-ratio: 4 / 3;
+        font-size: 11px;
+    }
+
+    .interests {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 32px;
+    }
+
+    .interests div {
+        padding: 18px 8px;
+    }
+
+    .interests span {
+        font-size: 10px;
+    }
+
+    /* --- Contact --- */
+
+    .contact {
+        min-height: 0;
+    }
+
+    .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+        align-items: start;
+    }
+
+    .contact-grid h2 {
+        font-size: clamp(42px, 13.8vw, 110px);
+        letter-spacing: -.055em;
+        line-height: .86;
+    }
+
+    .contact-info p {
+        font-size: 14px;
+    }
+
+    .email {
+        position: relative;
+        max-width: 100%;
+        font-size: clamp(16px, 4.6vw, 20px);
+        overflow-wrap: anywhere;
+    }
+
+    .email::before {
+        content: "";
+        position: absolute;
+        inset: -8px 0;
+    }
+
+    .email-row {
+        gap: 14px;
+        margin-bottom: 26px;
+    }
+
+    .copy-btn {
+        min-height: 44px;
+        padding: 10px 16px;
+        font-size: 11px;
+    }
+
+    .field label {
+        font-size: 10px;
+    }
+
+    .field input,
+    .field textarea {
+        /* 16px stops iOS zooming the page on focus */
+        font-size: 16px;
+        padding: 12px 0;
+    }
+
+    .field-error,
+    .form-status {
+        font-size: 11px;
+    }
+
+    .button {
+        font-size: 11px;
+    }
+
+    .submit-btn {
+        min-height: 52px;
+        min-width: 220px;
+        text-align: center;
+    }
+
+    .contact-info .local-time {
+        font-size: 11px;
+    }
+
+    /* --- Footer --- */
+
+    footer {
+        padding: 36px var(--gutter) calc(36px + env(safe-area-inset-bottom));
+        gap: 28px;
+    }
+
+    footer p,
+    .copyright,
+    .footer-links a {
+        font-size: 11px;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 4px 22px;
+    }
+
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    /* --- Floating UI --- */
+
+    .back-to-top {
+        right: max(16px, env(safe-area-inset-right));
+        bottom: max(16px, env(safe-area-inset-bottom));
+        width: 48px;
+        height: 48px;
+    }
+
+    .toast {
+        bottom: max(24px, calc(16px + env(safe-area-inset-bottom)));
+        max-width: calc(100vw - 32px);
+        text-align: center;
+    }
+}
+
+
+/* ---------- Large phones / small tablets (<= 600px) ---------- */
+
+@media (max-width: 600px) {
+
+    .project-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .interests {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* the portrait has an off-white backdrop: let it bleed to the screen
+       edges so it reads as a full-width banner, not a floating box */
+    .hero-image {
+        width: calc(100% + 2 * var(--gutter));
+        max-width: none;
+        margin-inline: calc(-1 * var(--gutter));
+    }
+
+    .code-bg {
+        right: var(--gutter);
+    }
+
+    .anc-stage {
+        aspect-ratio: 5 / 4;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+
+/* ---------- Phones (<= 550px) ---------- */
+
+@media (max-width: 550px) {
+
+    .skills-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .skill-card:last-child {
+        grid-column: auto;
+    }
+
+    /* nav icons are hidden here, so surface them inside the menu */
+    .mobile-socials {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 24px;
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .mobile-menu .mobile-socials a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding-left: 0;
+        font-family: "DM Mono", monospace;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        line-height: 1;
+        opacity: .75;
+    }
+
+    .mobile-menu .mobile-socials a:hover,
+    .mobile-menu .mobile-socials a:active {
+        padding-left: 0;
+        opacity: 1;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+
+/* ---------- Small phones (<= 360px) ---------- */
+
+@media (max-width: 360px) {
+
+    .details {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-bottom {
+        gap: 10px;
+        letter-spacing: 1.5px;
+    }
+
+    .skill-card {
+        padding: 22px;
+    }
+}
+
+
+/* ---------- Short landscape phones ---------- */
+
+@media (max-width: 900px) and (max-height: 520px) {
+
+    .mobile-menu {
+        justify-content: flex-start;
+    }
+
+    .mobile-menu a {
+        font-size: clamp(26px, 9vh, 40px);
+    }
+
+    .mobile-menu .mobile-socials a {
+        font-size: 13px;
+    }
+}
+
+
+/* ---------- Touch devices: tap states instead of sticky hover ---------- */
+
+@media (hover: none) {
+
+    a,
+    button {
+        -webkit-tap-highlight-color: rgba(245, 215, 66, .22);
+    }
+
+    .project-card:hover {
+        transform: none;
+        border-color: var(--light-gray);
+    }
+
+    .project-card:active {
+        border-color: #111;
+        transform: translateY(-3px);
+    }
+
+    .skill-card:hover {
+        background: transparent;
+        color: inherit;
+        transform: none;
+    }
+
+    .skill-card:active {
+        background: #111;
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    .project-info a:hover {
+        letter-spacing: normal;
+        color: inherit;
+        border-color: #111;
+    }
+
+    .project-info a:active {
+        letter-spacing: 1px;
+        color: #b89b00;
+        border-color: #b89b00;
+    }
+
+    .button:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .button:active {
+        transform: scale(.97);
+    }
+
+    .contact .button:hover {
+        background: #111;
+        color: #fff;
+    }
+
+    .contact .button:active {
+        background: #f5d742;
+        color: #111;
+    }
+
+    .filter-btn:not(.active):hover {
+        border-color: var(--light-gray);
+    }
+
+    .filter-btn:not(.active):active {
+        border-color: #111;
+        background: rgba(17, 17, 17, .06);
+    }
+
+    .copy-btn:hover {
+        background: transparent;
+        color: #111;
+    }
+
+    .copy-btn:active {
+        background: #111;
+        color: #fff;
+    }
+
+    .back-to-top:hover {
+        background: #111;
+        color: #fff;
+    }
+
+    .back-to-top:active {
+        background: #f5d742;
+        color: #111;
+    }
+
+    .resume-btn:active {
+        background: #fff;
+        color: #111;
+    }
+
+    /* a tap must not leave the marquee stuck in a paused state */
+    .marquee:hover .marquee-track {
+        animation-play-state: running;
+    }
+}
+
+@media (pointer: coarse) {
+
+    /* vertical swipes scroll the page, horizontal drags tilt the headphone */
+    .anc-headphone-hotspot {
+        touch-action: pan-y;
+    }
+}
+
+/* ---------- Small laptops / landscape tablets (901px - 1399px) ----------
+   The hero column is narrower than its 650px box here, which left the
+   decorative code snippet floating below the portrait. Let the box wrap the
+   portrait so the snippet stays anchored to it. */
+@media (min-width: 901px) and (max-width: 1399px) {
+
+    .hero-image {
+        height: auto;
+        min-height: 0;
+    }
+
+    .code-bg {
+        bottom: 1%;
     }
 }
