@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Samrat Anand | Designer × Coder</title>
+    <meta name="description"
+        content="Portfolio of Samrat Anand — UI/UX designer, front-end developer and B.Tech AIML student from India.">
+    <meta name="author" content="Samrat Anand">
+    <meta name="theme-color" content="#111111">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Samrat Anand | Designer × Coder">
+    <meta property="og:description"
+        content="UI/UX design, front-end development and AI/ML — selected work and projects.">
+    <meta property="og:image" content="samrat.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='34' text-anchor='middle' fill='white'%3ES%3C/text%3E%3C/svg%3E">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Samrat Anand",
+        "jobTitle": "UI/UX Designer & Front-end Developer",
+        "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+        "sameAs": [
+            "https://x.com/Yourxsamrat",
+            "https://www.linkedin.com/in/samrat-anand-4928663a1/",
+            "https://www.instagram.com/yourxsamrat/"
+        ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="headphone.js" defer></script>
+
+</head>
+
+
+<body>
+
+    <a href="#main" class="skip-link">Skip to content</a>
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav aria-label="Primary">
+
+        <a href="#" class="logo" aria-label="Back to top">
+            S
+        </a>
+
+        <div class="nav-links">
+            <a href="#about">about</a>
+            <a href="#work">work</a>
+            <a href="#skills">skills</a>
+            <a href="#contact">contact</a>
+            <a href="resume.pdf" download  class="resume-btn"> 
+                <span>Resume</span>
+                <span class="download-icon">↓</span>
+            </a>
+        </div>
+
+        <div class="socials">
+            <a href="https://x.com/Yourxsamrat" target="_blank" aria-label="X">𝕏</a>
+            <a href="https://www.linkedin.com/in/samrat-anand-4928663a1/" target="_blank" aria-label="LinkedIn">in</a>
+            <a href="https://www.instagram.com/yourxsamrat/" target="_blank" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.7" cy="6.5" r=".8" fill="currentColor" stroke="none" />
+                </svg>
+            </a>
+        </div>
+
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false"
+            aria-controls="mobile-menu">
+            <span></span><span></span><span></span>
+        </button>
+
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="#about">about</a>
+        <a href="#work">work</a>
+        <a href="#skills">skills</a>
+        <a href="#contact">contact</a>
+        <a href="resume.pdf" download>resume ↓</a>
+    </div>
+
+    <main id="main">
+
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <!-- LEFT -->
+
+        <div class="hero-side hero-left">
+
+            <h1>designer</h1>
+
+            <p>
+                Product designer specialising in
+                UI, design systems and visual experiences.
+            </p>
+
+        </div>
+
+
+        <!-- CENTER -->
+
+        <div class="hero-image">
+
+            <img class="portrait" src="samrat.png" alt="Samrat Anand" fetchpriority="high" decoding="async">
+
+            <div class="code-bg">
+                &lt;html&gt;<br>
+                &nbsp;&nbsp;&lt;body&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;CSS<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;HTML5<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;JavaScript<br>
+                &nbsp;&nbsp;&lt;/body&gt;
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="hero-side hero-right">
+
+            <h1>&lt;coder&gt;</h1>
+
+            <p>
+                Front-end developer who writes
+                clean, elegant and efficient code.
+            </p>
+
+        </div>
+
+
+        <div class="hero-bottom">
+            SOME OF MY LATEST WORK
+            <span>↓</span>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MARQUEE
+    ========================== -->
+
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>UI / UX</span><span>✦</span><span>FIGMA</span><span>✦</span><span>HTML</span><span>✦</span><span>CSS</span><span>✦</span><span>JAVASCRIPT</span><span>✦</span><span>PYTHON</span><span>✦</span><span>C++</span><span>✦</span><span>MACHINE LEARNING</span><span>✦</span><span>COMPUTER VISION</span><span>✦</span>
+            <span>UI / UX</span><span>✦</span><span>FIGMA</span><span>✦</span><span>HTML</span><span>✦</span><span>CSS</span><span>✦</span><span>JAVASCRIPT</span><span>✦</span><span>PYTHON</span><span>✦</span><span>C++</span><span>✦</span><span>MACHINE LEARNING</span><span>✦</span><span>COMPUTER VISION</span><span>✦</span>
+        </div>
+    </div>
+
+
+
+
+    <!-- =========================
+         SELECTED WORK
+    ========================== -->
+
+    <section id="work" class="section">
+
+        <div class="section-number">
+            01 — SELECTED WORK
+        </div>
+
+        <div class="section-heading reveal">
+
+            <h2>
+                SELECTED<br>
+                WORK
+            </h2>
+
+            <p>
+                A collection of projects I've designed,
+                developed and explored.
+            </p>
+
+        </div>
+
+        <!-- FILTERS -->
+
+        <div class="filters reveal" role="group" aria-label="Filter projects">
+            <button class="filter-btn active" data-filter="all" aria-pressed="true">ALL</button>
+            <button class="filter-btn" data-filter="design" aria-pressed="false">DESIGN</button>
+            <button class="filter-btn" data-filter="web" aria-pressed="false">WEB</button>
+            <button class="filter-btn" data-filter="ai" aria-pressed="false">AI / ML</button>
+        </div>
+
+
+
+        <!-- ALL CARDS SAME SIZE -->
+
+        <div class="project-grid">
+
+
+            <!-- PROJECT 1 -->
+
+            <article class="project-card reveal" data-category="design web">
+
+                <div class="project-image project-one">
+                    <span>01</span>
+                </div>
+
+                <div class="project-info">
+
+                    <h3>Portfolio Website</h3>
+
+                    <p class="project-type">
+                        UI/UX · WEB DEVELOPMENT
+                    </p>
+
+                    <p class="project-description">
+                        A personal portfolio combining
+                        design, development and AI/ML.
+                    </p>
+
+                    <a href="#">
+                        VIEW PROJECT →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJECT 2 -->
+
+            <article class="project-card reveal" data-category="ai">
+
+                <div class="project-image project-two">
+                    <span>02</span>
+                </div>
+
+                <div class="project-info">
+
+                    <h3>AI Project</h3>
+
+                    <p class="project-type">
+                        AI · PYTHON
+                    </p>
+
+                    <p class="project-description">
+                        An experimental AI project built
+                        while learning machine learning.
+                    </p>
+
+                    <a href="#">
+                        VIEW PROJECT →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJECT 3 -->
+
+            <article class="project-card reveal" data-category="web">
+
+                <div class="project-image project-three">
+                    <span>03</span>
+                </div>
+
+                <div class="project-info">
+
+                    <h3>Web Application</h3>
+
+                    <p class="project-type">
+                        HTML · CSS · JAVASCRIPT
+                    </p>
+
+                    <p class="project-description">
+                        A responsive web application
+                        focused on clean user experience.
+                    </p>
+
+                    <a href="#">
+                        VIEW PROJECT →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJECT 4 -->
+
+            <article class="project-card reveal" data-category="design">
+
+                <div class="project-image project-four">
+                    <span>04</span>
+                </div>
+
+                <div class="project-info">
+
+                    <h3>Graphic Design</h3>
+
+                    <p class="project-type">
+                        VISUAL DESIGN · BRANDING
+                    </p>
+
+                    <p class="project-description">
+                        A collection of visual experiments,
+                        posters and graphic compositions.
+                    </p>
+
+                    <a href="#">
+                        VIEW PROJECT →
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <p id="project-empty" class="project-empty" hidden>No projects in this category yet.</p>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section id="about" class="section">
+
+        <div class="section-number reveal">
+            02 — ABOUT
+        </div>
+
+
+        <div class="about-grid reveal">
+
+            <div class="about-text">
+
+                <h2>
+                    ABOUT<br>
+                    ME
+                </h2>
+
+                <p>
+                    I'm a first-year AIML student interested
+                    in design, development and artificial
+                    intelligence.
+                </p>
+
+                <p>
+                    I enjoy turning ideas into interfaces
+                    that are simple, useful and visually
+                    interesting.
+                </p>
+
+
+                <div class="details">
+
+                    <div>
+                        <span>BASED IN</span>
+                        <strong>India</strong>
+                    </div>
+
+                    <div>
+                        <span>STUDYING</span>
+                        <strong>B.Tech AIML</strong>
+                    </div>
+
+                    <div>
+                        <span>FOCUS</span>
+                        <strong>UI/UX · Frontend · AI</strong>
+                    </div>
+
+                    <div>
+                        <span>INTERESTS</span>
+                        <strong>Design · Code · AI</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-image">
+                <img src="samrat_about.png" alt="Samrat Anand portrait" loading="lazy" decoding="async">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SKILLS
+    ========================== -->
+
+    <section id="skills" class="section">
+
+        <div class="section-number">
+            03 — SKILLS
+        </div>
+
+        <h2 class="big-title">
+            WHAT I<br>
+            WORK WITH
+        </h2>
+
+
+        <div class="skills-grid reveal">
+
+
+            <div class="skill-card">
+
+                <span class="skill-number">
+                    01
+                </span>
+
+                <h3>DESIGN</h3>
+
+                <ul>
+                    <li><i class="fa-solid fa-object-group"></i> UI / UX</li>
+                    <li><i class="fa-brands fa-figma"></i> Figma</li>
+                    <li><i class="fa-solid fa-pen-ruler"></i> Prototyping</li>
+                    <li><i class="fa-solid fa-palette"></i> Visual Design</li>
+                    <li><i class="fa-solid fa-ruler-combined"></i> Graphic Design</li>
+                </ul>
+
+            </div>
+
+
+
+            <div class="skill-card">
+
+                <span class="skill-number">
+                    02
+                </span>
+
+                <h3>DEVELOPMENT</h3>
+
+                <ul>
+                    <li><i class="fa-brands fa-html5"></i> HTML</li>
+                    <li><i class="fa-brands fa-css3-alt"></i> CSS</li>
+                    <li><i class="fa-brands fa-js"></i> JavaScript</li>
+                    <li><i class="fa-solid fa-code"></i> C++</li>
+                    <li><i class="fa-brands fa-python"></i> Python</li>
+                </ul>
+
+            </div>
+
+
+
+            <div class="skill-card">
+
+                <span class="skill-number">
+                    03
+                </span>
+
+                <h3>AI / ML</h3>
+
+                <ul>
+                    <li><i class="fa-solid fa-brain"></i> Machine Learning</li>
+                    <li><i class="fa-brands fa-python"></i> Python</li>
+                    <li><i class="fa-solid fa-chart-column"></i> Data</li>
+                    <li><i class="fa-solid fa-microchip"></i> AI Concepts</li>
+                    <li><i class="fa-solid fa-eye"></i> Computer Vision</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SPECIAL PROJECT
+    ========================== -->
+
+    <section class="special-project anc-section" id="anc">
+
+        <div class="anc-heading">
+            <div class="section-number">04 — SPECIAL PROJECT</div>
+        </div>
+
+        <div class="anc-story">
+            <div class="anc-copy">
+                <p class="mono anc-kicker">SMART INDIA HACKATHON · 2026</p>
+                <h2>Adaptive<br>noise<br>cancellation.</h2>
+                <p class="anc-intro">
+                    Watch an incoming sound move through an FxLMS filter, where
+                    its learned response generates an inverse signal.
+                </p>
+                <p class="anc-copy-note mono">HOVER THE HEADPHONES TO BEGIN <span>↗</span></p>
+            </div>
+
+            <div class="anc-stage" data-model="">
+                <canvas class="anc-canvas" aria-hidden="true"></canvas>
+                <button class="anc-headphone-hotspot" type="button"
+                    aria-label="Rotate the 3D headphone" title="Rotate the headphone"></button>
+            </div>
+        </div>
+
+        <div class="special-details anc-details">
+            <div><span>FIELD</span><strong>AI + HARDWARE</strong></div>
+            <div><span>CONCEPT</span><strong>ADAPTIVE FILTER</strong></div>
+            <div><span>TECHNOLOGY</span><strong>LMS / FxLMS</strong></div>
+            <div><span>EVENT</span><strong>SIH 2026</strong></div>
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         PERSONAL
+    ========================== -->
+
+    <section class="personal">
+
+        <div class="section-number">
+            05 — PERSONAL
+        </div>
+
+
+        <div class="personal-grid reveal">
+
+            <div class="personal-text">
+
+                <h2>
+                    WHEN I'M<br>
+                    NOT CODING...
+                </h2>
+
+                <p>
+                    I'm probably watching a movie,
+                    gaming, experimenting with a new
+                    design or learning something new.
+                </p>
+
+            </div>
+
+
+            <div class="personal-image">
+                PERSONAL IMAGE
+            </div>
+
+        </div>
+
+
+        <div class="interests">
+
+            <div>
+                🎬
+                <span>MOVIES</span>
+            </div>
+
+            <div>
+                🎮
+                <span>GAMING</span>
+            </div>
+
+            <div>
+                🎧
+                <span>MUSIC</span>
+            </div>
+
+            <div>
+                ✏️
+                <span>DESIGN</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section id="contact" class="contact section">
+
+        <div class="section-number">
+            06 — CONTACT
+        </div>
+
+
+        <div class="contact-grid reveal">
+
+            <h2>
+                LET'S<br>
+                <span class="highlight-word">BUILD</span><br>
+                SOMETHING.
+            </h2>
+
+
+            <div class="contact-info">
+
+                <p>
+                    Have an idea or want to
+                    work together?
+                </p>
+
+                <div class="email-row">
+                    <a
+                        href="mailto:your@email.com"
+                        class="email">
+                        your@email.com
+                    </a>
+
+                    <button type="button" id="copy-email" class="copy-btn" data-email="your@email.com"
+                        aria-label="Copy email address">
+                        <i class="fa-regular fa-copy"></i> COPY
+                    </button>
+                </div>
+
+                <form id="contact-form" class="contact-form" data-to="your@email.com" novalidate>
+
+                    <div class="field">
+                        <label for="cf-name">NAME</label>
+                        <input id="cf-name" name="name" type="text" autocomplete="name" required
+                            aria-describedby="cf-name-error">
+                        <small id="cf-name-error" class="field-error" role="alert"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="cf-email">EMAIL</label>
+                        <input id="cf-email" name="email" type="email" autocomplete="email" required
+                            aria-describedby="cf-email-error">
+                        <small id="cf-email-error" class="field-error" role="alert"></small>
+                    </div>
+
+                    <div class="field">
+                        <label for="cf-message">MESSAGE</label>
+                        <textarea id="cf-message" name="message" rows="4" required
+                            aria-describedby="cf-message-error"></textarea>
+                        <small id="cf-message-error" class="field-error" role="alert"></small>
+                    </div>
+
+                    <button type="submit" class="button submit-btn">SEND MESSAGE →</button>
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+
+                </form>
+
+                <p class="local-time mono">
+                    LOCAL TIME · <span id="local-time">--:--</span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div>
+
+            <div class="footer-logo">
+                S
+            </div>
+
+            <p>
+                Samrat Anand<br>
+                Designer × Coder × AIML
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#">GitHub</a>
+            <a href="https://www.linkedin.com/in/samrat-anand-4928663a1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.instagram.com/yourxsamrat/" target="_blank" rel="noopener noreferrer">Instagram</a>
+
+        </div>
+
+
+        <div class="copyright">
+            © <span id="year">2026</span>
+        </div>
+
+    </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+
+</body>
+
+</html>

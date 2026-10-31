@@ -48,6 +48,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -514,68 +515,131 @@
          SPECIAL PROJECT
     ========================== -->
 
-    <section class="special-project">
+    <section class="special-project anc-section" id="anc">
 
-        <div class="section-number">
-            04 — SPECIAL PROJECT
+        <div class="anc-heading">
+            <div class="section-number">04 — SPECIAL PROJECT</div>
         </div>
 
-
-        <div class="special-grid reveal">
-
-            <div class="special-content">
-
-                <p class="mono">
-                    SMART INDIA HACKATHON · 2026
+        <div class="anc-story">
+            <div class="anc-copy">
+                <p class="mono anc-kicker">SMART INDIA HACKATHON · 2026</p>
+                <h2>Adaptive<br>noise<br>cancellation.</h2>
+                <p class="anc-intro">
+                    Watch an incoming sound move through an FxLMS filter, where
+                    its learned response generates an inverse signal.
                 </p>
-
-                <h2>
-                    ADAPTIVE<br>
-                    NOISE<br>
-                    CANCELLATION
-                </h2>
-
-                <p class="special-description">
-                    A hardware and AI based approach
-                    to adaptive noise cancellation.
-                </p>
-
-                <a href="#" class="button">
-                    VIEW PROJECT →
-                </a>
-
+                <p class="anc-copy-note mono">HOVER THE HEADPHONES TO BEGIN <span>↗</span></p>
             </div>
 
+            <div class="anc-stage">
+                <img class="anc-background" src="sih.png"
+                    alt="Active noise cancellation system: environmental noise is analyzed by an FxLMS processor and countered by anti-noise."
+                    decoding="async" aria-hidden="true">
 
-            <div class="special-image">
-                <img src="sih.png" alt="Smart India Hackathon adaptive noise cancellation project" loading="lazy" decoding="async">
+                <svg class="anc-overlay" viewBox="0 0 1680 940" preserveAspectRatio="none"
+                    role="img" aria-label="Interactive headphones activate an FxLMS noise-cancellation system"
+                    focusable="false">
+                    <defs>
+                        <clipPath id="anc-headphone-clip">
+                            <ellipse cx="785" cy="450" rx="220" ry="300" />
+                        </clipPath>
+                        <clipPath id="anc-speaker-left-clip">
+                            <rect class="anc-reveal-clip" x="0" y="0" width="0" height="940" />
+                        </clipPath>
+                        <clipPath id="anc-label-noise-clip">
+                            <rect class="anc-reveal-clip" x="85" y="120" width="0" height="190" />
+                        </clipPath>
+                        <clipPath id="anc-microphone-clip">
+                            <rect class="anc-reveal-clip" x="390" y="130" width="0" height="470" />
+                        </clipPath>
+                        <clipPath id="anc-label-mic-clip">
+                            <rect class="anc-reveal-clip" x="375" y="130" width="0" height="170" />
+                        </clipPath>
+                        <clipPath id="anc-processor-clip">
+                            <rect class="anc-reveal-clip" x="965" y="120" width="0" height="570" />
+                        </clipPath>
+                        <clipPath id="anc-anti-noise-clip">
+                            <rect class="anc-reveal-clip" x="1190" y="120" width="0" height="570" />
+                        </clipPath>
+                        <clipPath id="anc-speaker-right-clip">
+                            <rect class="anc-reveal-clip" x="1530" y="120" width="0" height="570" />
+                        </clipPath>
+                        <clipPath id="anc-label-speaker-clip">
+                            <rect class="anc-reveal-clip" x="1420" y="120" width="0" height="190" />
+                        </clipPath>
+                        <filter id="anc-red-glow" x="-80%" y="-250%" width="260%" height="600%">
+                            <feGaussianBlur stdDeviation="7" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        <filter id="anc-blue-glow" x="-80%" y="-250%" width="260%" height="600%">
+                            <feGaussianBlur stdDeviation="7" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        <radialGradient id="anc-calm-gradient">
+                            <stop offset="0" stop-color="#b9f4ff" stop-opacity=".2" />
+                            <stop offset="1" stop-color="#b9f4ff" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    <g class="anc-scene-headphones">
+                        <image href="sih.png" x="0" y="0" width="1680" height="940"
+                            preserveAspectRatio="none" clip-path="url(#anc-headphone-clip)" />
+                    </g>
+                    <image class="anc-scene-left" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-speaker-left-clip)" />
+                    <image class="anc-scene-label-noise" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-label-noise-clip)" />
+                    <image class="anc-scene-mic" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-microphone-clip)" />
+                    <image class="anc-scene-label-mic" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-label-mic-clip)" />
+                    <image class="anc-scene-processor" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-processor-clip)" />
+                    <image class="anc-scene-anti" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-anti-noise-clip)" />
+                    <image class="anc-scene-speaker-right" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-speaker-right-clip)" />
+                    <image class="anc-scene-label-speaker" href="sih.png" x="0" y="0" width="1680" height="940"
+                        preserveAspectRatio="none" clip-path="url(#anc-label-speaker-clip)" />
+                    <rect class="anc-mic-wave-cover" x="385" y="400" width="90" height="105" />
+                    <rect class="anc-calm-wash" x="0" y="0" width="1680" height="940" />
+                    <path class="anc-wave anc-wave-red" />
+                    <path class="anc-wave anc-wave-blue" />
+                    <g class="anc-red-particles"></g>
+                    <g class="anc-blue-particles"></g>
+                    <g class="anc-circuit-particles"></g>
+                    <circle class="anc-mic-ripple" cx="476" cy="450" r="20" />
+                    <ellipse class="anc-headphone-glow" cx="770" cy="445" rx="190" ry="285" />
+                    <circle class="anc-processor-halo" cx="1104" cy="448" r="95" />
+                    <circle class="anc-calm-halo" cx="850" cy="470" r="340" fill="url(#anc-calm-gradient)" />
+                </svg>
+
+                <button class="anc-headphone-hotspot" type="button"
+                    aria-label="Play the active noise cancellation animation"
+                    title="Play the ANC animation"></button>
+
+                <div class="anc-stage-top mono">
+                    <span><i></i> SIGNAL STUDY / 001</span>
+                    <span class="anc-phase-label">HOVER TO BEGIN</span>
+                </div>
+                <div class="anc-stage-bottom mono">
+                    <span>FxLMS · ADAPTIVE FILTER</span>
+                    <span class="anc-progress-label">HOVER HEADPHONES TO BEGIN <b>↗</b></span>
+                </div>
             </div>
-
         </div>
 
-
-        <div class="special-details">
-
-            <div>
-                <span>FIELD</span>
-                <strong>AI + HARDWARE</strong>
-            </div>
-
-            <div>
-                <span>CONCEPT</span>
-                <strong>ADAPTIVE FILTER</strong>
-            </div>
-
-            <div>
-                <span>TECHNOLOGY</span>
-                <strong>LMS / FxLMS</strong>
-            </div>
-
-            <div>
-                <span>EVENT</span>
-                <strong>SIH 2026</strong>
-            </div>
-
+        <div class="special-details anc-details">
+            <div><span>FIELD</span><strong>AI + HARDWARE</strong></div>
+            <div><span>CONCEPT</span><strong>ADAPTIVE FILTER</strong></div>
+            <div><span>TECHNOLOGY</span><strong>LMS / FxLMS</strong></div>
+            <div><span>EVENT</span><strong>SIH 2026</strong></div>
         </div>
 
     </section>

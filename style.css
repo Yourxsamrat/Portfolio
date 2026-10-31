@@ -1732,3 +1732,196 @@ body.menu-open {
         transform: none;
     }
 }
+
+/* ---------- FxLMS cinematic story ---------- */
+
+.anc-section {
+    position: relative;
+    overflow: clip;
+    padding: 90px 4vw 64px;
+    background:
+        radial-gradient(ellipse at 50% 35%, rgba(19, 40, 68, .28), transparent 58%),
+        #07090e;
+    color: #f4f6fb;
+}
+
+.anc-heading,
+.anc-details {
+    width: min(100%, 1500px);
+    margin-inline: auto;
+}
+
+.anc-heading {
+    margin-bottom: 0;
+}
+
+.anc-section .section-number {
+    color: #838b9c;
+}
+
+.anc-kicker {
+    margin-bottom: 12px;
+    color: #9daac0;
+    font-size: 10px;
+    letter-spacing: .16em;
+}
+
+.anc-copy h2 {
+    font-size: clamp(42px, 5.4vw, 78px);
+    line-height: .96;
+    letter-spacing: -.065em;
+}
+
+.anc-intro {
+    max-width: 370px;
+    padding-bottom: 5px;
+    color: #a7adba;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.anc-story {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    align-items: start;
+    gap: clamp(32px, 6vw, 96px);
+    width: min(100%, 1500px);
+    margin: 36px auto 0;
+}
+
+.anc-copy {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+}
+
+.anc-copy .anc-intro {
+    margin-top: 22px;
+}
+
+.anc-copy-note {
+    margin-top: 32px;
+    color: #79869a;
+    font-size: 9px;
+    letter-spacing: .12em;
+}
+
+.anc-copy-note span {
+    padding-left: 6px;
+    color: #9cddff;
+    font-size: 14px;
+}
+
+.anc-stage {
+    --anc-glow: .16;
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    aspect-ratio: 1680 / 940;
+    overflow: hidden;
+    isolation: isolate;
+    border-block: 1px solid rgba(148, 183, 255, .18);
+    background:
+        radial-gradient(ellipse 34% 46% at 50% 47%, rgba(104, 146, 214, var(--anc-glow)), transparent 70%),
+        radial-gradient(ellipse 38% 9% at 50% 84%, rgba(120, 150, 200, .09), transparent 75%),
+        #07090e;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, .42);
+}
+
+.anc-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+}
+
+.anc-canvas.is-ready {
+    opacity: 1;
+}
+
+.anc-headphone-hotspot {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    cursor: default;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.anc-headphone-hotspot:focus-visible {
+    outline: 1px solid rgba(123, 212, 255, .5);
+    outline-offset: -6px;
+}
+
+.anc-details {
+    margin-top: 38px;
+    border-color: rgba(190, 211, 255, .2);
+}
+
+.anc-details div {
+    border-color: rgba(190, 211, 255, .14);
+}
+
+.anc-details span {
+    color: #78859b;
+}
+
+.anc-details strong {
+    color: #e2e8f4;
+}
+
+@media (max-width: 700px) {
+    .anc-section {
+        padding: 72px 5vw 42px;
+    }
+
+    .anc-copy h2 {
+        font-size: clamp(38px, 10vw, 58px);
+    }
+
+    .anc-intro {
+        max-width: 400px;
+    }
+
+    .anc-story {
+        display: block;
+        margin: 30px auto 0;
+    }
+
+    .anc-copy {
+        margin-bottom: 24px;
+    }
+
+    .anc-copy-note {
+        display: none;
+    }
+
+    .anc-stage {
+        width: 100%;
+    }
+
+    .anc-details {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 25px;
+    }
+
+    .anc-details div:nth-child(2) {
+        border-right: 0;
+    }
+
+    .anc-details div:nth-child(n + 3) {
+        border-top: 1px solid rgba(190, 211, 255, .14);
+    }
+}

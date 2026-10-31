@@ -1,0 +1,529 @@
+/* =========================================================
+   Portfolio interactions
+   - mobile menu, scroll progress, scrollspy, reveal-on-scroll
+   - project filter, contact form, copy-email, toast
+   - live IST clock, back-to-top
+   ========================================================= */
+(() => {
+    "use strict";
+
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    document.documentElement.classList.add("js");
+
+    /* ---------- Toast ---------- */
+    const toast = $("#toast");
+    let toastTimer;
+    function showToast(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    /* ---------- Mobile menu ---------- */
+    const menuBtn = $("#menu-toggle");
+    const mobileMenu = $("#mobile-menu");
+
+    function setMenu(open) {
+        if (!menuBtn || !mobileMenu) return;
+        menuBtn.setAttribute("aria-expanded", String(open));
+        mobileMenu.classList.toggle("open", open);
+        document.body.classList.toggle("menu-open", open);
+    }
+
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", () =>
+            setMenu(menuBtn.getAttribute("aria-expanded") !== "true")
+        );
+        $$("a", mobileMenu).forEach((a) => a.addEventListener("click", () => setMenu(false)));
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") setMenu(false);
+        });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900) setMenu(false);
+        });
+    }
+
+    /* ---------- Scroll progress + back-to-top ---------- */
+    const progress = $("#scroll-progress");
+    const toTop = $("#back-to-top");
+
+    function onScroll() {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if (progress) progress.style.width = pct + "%";
+        if (toTop) toTop.classList.toggle("show", window.scrollY > 600);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    if (toTop) {
+        toTop.addEventListener("click", () =>
+            window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" })
+        );
+    }
+
+    /* ---------- Scrollspy ---------- */
+    const navLinks = $$('.nav-links a[href^="#"], #mobile-menu a[href^="#"]');
+    const spyTargets = ["about", "work", "skills", "contact"]
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+    if ("IntersectionObserver" in window && spyTargets.length) {
+        const spy = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    navLinks.forEach((link) => {
+                        const active = link.getAttribute("href") === "#" + entry.target.id;
+                        link.classList.toggle("active", active);
+                        if (active) link.setAttribute("aria-current", "true");
+                        else link.removeAttribute("aria-current");
+                    });
+                });
+            },
+            { rootMargin: "-45% 0px -50% 0px" }
+        );
+        spyTargets.forEach((t) => spy.observe(t));
+    }
+
+    /* ---------- Reveal on scroll ---------- */
+    const revealEls = $$(".reveal");
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+        revealEls.forEach((el) => el.classList.add("in"));
+    } else {
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in");
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+        );
+        revealEls.forEach((el) => io.observe(el));
+    }
+
+    /* ---------- Project filter ---------- */
+    const filterBtns = $$(".filter-btn");
+    const cards = $$(".project-card");
+    const emptyState = $("#project-empty");
+
+    filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const filter = btn.dataset.filter;
+            filterBtns.forEach((b) => {
+                const on = b === btn;
+                b.classList.toggle("active", on);
+                b.setAttribute("aria-pressed", String(on));
+            });
+
+            let visible = 0;
+            cards.forEach((card) => {
+                const tags = (card.dataset.category || "").split(" ");
+                const show = filter === "all" || tags.includes(filter);
+                card.hidden = !show;
+                if (show) {
+                    visible++;
+                    card.classList.remove("in");
+                    // restart the reveal animation
+                    void card.offsetWidth;
+                    card.classList.add("in");
+                }
+            });
+            if (emptyState) emptyState.hidden = visible !== 0;
+        });
+    });
+
+    /* ---------- Copy email ---------- */
+    const copyBtn = $("#copy-email");
+    if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+            const email = copyBtn.dataset.email;
+            try {
+                await navigator.clipboard.writeText(email);
+                showToast("Email copied to clipboard");
+            } catch {
+                showToast("Copy failed — " + email);
+            }
+        });
+    }
+
+    /* ---------- Contact form (opens the visitor's mail client) ---------- */
+    const form = $("#contact-form");
+    if (form) {
+        const status = $("#form-status");
+        const fields = {
+            name: $("#cf-name"),
+            email: $("#cf-email"),
+            message: $("#cf-message"),
+        };
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const setError = (field, msg) => {
+            const err = $("#" + field.id + "-error");
+            field.setAttribute("aria-invalid", msg ? "true" : "false");
+            if (err) err.textContent = msg;
+        };
+
+        function validate() {
+            let ok = true;
+            if (fields.name.value.trim().length < 2) {
+                setError(fields.name, "Please enter your name.");
+                ok = false;
+            } else setError(fields.name, "");
+
+            if (!emailRe.test(fields.email.value.trim())) {
+                setError(fields.email, "Please enter a valid email.");
+                ok = false;
+            } else setError(fields.email, "");
+
+            if (fields.message.value.trim().length < 10) {
+                setError(fields.message, "Message should be at least 10 characters.");
+                ok = false;
+            } else setError(fields.message, "");
+            return ok;
+        }
+
+        Object.values(fields).forEach((f) =>
+            f.addEventListener("input", () => {
+                if (f.getAttribute("aria-invalid") === "true") validate();
+            })
+        );
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (!validate()) {
+                status.textContent = "Please fix the highlighted fields.";
+                return;
+            }
+            const to = form.dataset.to;
+            const subject = encodeURIComponent("Portfolio enquiry from " + fields.name.value.trim());
+            const body = encodeURIComponent(
+                fields.message.value.trim() +
+                    "\n\n— " +
+                    fields.name.value.trim() +
+                    " (" +
+                    fields.email.value.trim() +
+                    ")"
+            );
+            status.textContent = "Opening your email app…";
+            window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+            showToast("Opening your email app…");
+            form.reset();
+        });
+    }
+
+    /* ---------- Live local time (IST) ---------- */
+    const clock = $("#local-time");
+    if (clock) {
+        const fmt = new Intl.DateTimeFormat("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+            timeZone: "Asia/Kolkata",
+        });
+        const tick = () => (clock.textContent = fmt.format(new Date()) + " IST");
+        tick();
+        setInterval(tick, 30000);
+    }
+
+    /* ---------- Headphone-triggered FxLMS visual ---------- */
+    const ancStage = $(".anc-stage");
+    if (ancStage && window.gsap) {
+        const { gsap } = window;
+        const svg = $(".anc-overlay", ancStage);
+        const headphoneHotspot = $(".anc-headphone-hotspot", ancStage);
+        const headphoneImage = $(".anc-scene-headphones", svg);
+        const redWave = $(".anc-wave-red", svg);
+        const blueWave = $(".anc-wave-blue", svg);
+        const redParticles = $(".anc-red-particles", svg);
+        const blueParticles = $(".anc-blue-particles", svg);
+        const circuitParticles = $(".anc-circuit-particles", svg);
+        const micRipple = $(".anc-mic-ripple", svg);
+        const headphoneGlow = $(".anc-headphone-glow", svg);
+        const processorHalo = $(".anc-processor-halo", svg);
+        const calmHalo = $(".anc-calm-halo", svg);
+        const calmWash = $(".anc-calm-wash", svg);
+        const micWaveCover = $(".anc-mic-wave-cover", svg);
+        const background = $(".anc-background", ancStage);
+        const topHud = $(".anc-stage-top", ancStage);
+        const bottomHud = $(".anc-stage-bottom", ancStage);
+        const phaseLabel = $(".anc-phase-label", ancStage);
+        const progressLabel = $(".anc-progress-label", ancStage);
+        const clipRects = {
+            leftSpeaker: $("#anc-speaker-left-clip rect", svg),
+            noiseLabel: $("#anc-label-noise-clip rect", svg),
+            mic: $("#anc-microphone-clip rect", svg),
+            micLabel: $("#anc-label-mic-clip rect", svg),
+            processor: $("#anc-processor-clip rect", svg),
+            anti: $("#anc-anti-noise-clip rect", svg),
+            rightSpeaker: $("#anc-speaker-right-clip rect", svg),
+            speakerLabel: $("#anc-label-speaker-clip rect", svg),
+        };
+        const sceneLayers = [
+            [$(".anc-scene-left", svg), "leftSpeaker"],
+            [$(".anc-scene-label-noise", svg), "noiseLabel"],
+            [$(".anc-scene-mic", svg), "micReveal"],
+            [$(".anc-scene-label-mic", svg), "micLabel"],
+            [$(".anc-scene-processor", svg), "processorReveal"],
+            [$(".anc-scene-anti", svg), "anti"],
+            [$(".anc-scene-speaker-right", svg), "rightSpeaker"],
+            [$(".anc-scene-label-speaker", svg), "speakerLabel"],
+        ];
+        const sceneScaleTargets = {
+            leftSpeaker: [70, 450],
+            micReveal: [475, 450],
+            processorReveal: [1104, 448],
+            rightSpeaker: [1605, 450],
+        };
+        const revealClips = [
+            [clipRects.leftSpeaker, "leftSpeaker", 140],
+            [clipRects.noiseLabel, "noiseLabel", 200],
+            [clipRects.mic, "micReveal", 180],
+            [clipRects.micLabel, "micLabel", 190],
+            [clipRects.processor, "processorReveal", 255],
+            [clipRects.anti, "antiReveal", 230],
+            [clipRects.rightSpeaker, "rightSpeaker", 150],
+            [clipRects.speakerLabel, "speakerLabel", 180],
+        ];
+        const svgNS = "http://www.w3.org/2000/svg";
+        const state = {
+            leftSpeaker: 0, noiseLabel: 0, micReveal: 0, micLabel: 0,
+            processorReveal: 0, antiReveal: 0, rightSpeaker: 0, speakerLabel: 0,
+            noise: 0, mic: 0, processor: 0, anti: 0, cancel: 0,
+            activation: 0, ui: 0, progress: 0, phase: 0, clock: 0,
+        };
+        const makeParticles = (group, count, radius) =>
+            Array.from({ length: count }, (_, index) => {
+                const particle = document.createElementNS(svgNS, "circle");
+                particle.setAttribute("r", String(radius + (index % 3) * .8));
+                group.appendChild(particle);
+                return particle;
+            });
+        const redDots = makeParticles(redParticles, 9, 2);
+        const blueDots = makeParticles(blueParticles, 9, 2);
+        const circuitDots = makeParticles(circuitParticles, 14, 1.8);
+        const phases = [
+            "ENVIRONMENTAL NOISE",
+            "MICROPHONE DETECTION",
+            "FxLMS ANALYSIS",
+            "ANTI-NOISE GENERATED",
+            "SIGNAL CANCELLED",
+        ];
+        let lastPhase = -1;
+        let isPlaying = false;
+        let completed = false;
+        const timings = {
+            headphoneGlow: .35,
+            microphoneReveal: .35,
+            leftSpeakerReveal: .4,
+            redNoiseTravel: 1.05,
+            microphoneDetects: .4,
+            processorReveal: .5,
+            processing: .55,
+            antiNoiseTravel: .85,
+            rightSpeakerReveal: .4,
+            cancellation: .7,
+            reset: .65,
+        };
+
+        function wavePath(startX, endX, baseY, amplitude, phase, inverse = false) {
+            const span = Math.max(0, endX - startX);
+            if (span < 1) return `M ${startX} ${baseY}`;
+            const points = Math.max(24, Math.ceil(span / 5));
+            const direction = inverse ? Math.PI : 0;
+            let path = "";
+            for (let index = 0; index <= points; index++) {
+                const ratio = index / points;
+                const x = startX + span * ratio;
+                const taper = Math.sin(Math.PI * ratio) * .3 + .7;
+                const y = baseY + Math.sin(ratio * Math.PI * 8 + phase + direction) * amplitude * taper
+                    + Math.sin(ratio * Math.PI * 17 + phase * .65) * amplitude * .13;
+                path += `${index === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)} `;
+            }
+            return path;
+        }
+
+        function moveDots(dots, startX, endX, baseY, amplitude, phase, reveal) {
+            const visible = reveal > .02;
+            dots.forEach((dot, index) => {
+                const ratio = (state.clock * .2 - index * .105 + 1) % 1;
+                const x = startX + Math.max(0, endX - startX) * ratio;
+                const wavePhase = ratio * Math.PI * 8 + phase;
+                const y = baseY + Math.sin(wavePhase) * amplitude * .78;
+                dot.setAttribute("cx", x.toFixed(1));
+                dot.setAttribute("cy", y.toFixed(1));
+                dot.style.opacity = visible && ratio <= reveal ? String(.35 + .65 * reveal) : "0";
+            });
+        }
+
+        function render() {
+            const noiseEnd = 112 + 365 * state.noise;
+            const antiEnd = 1155 + 440 * state.anti;
+            const amplitude = 54 * (1 - state.cancel * .82);
+            const blueAmplitude = 57 * (1 - state.cancel * .9);
+            const phase = state.clock * 2.4;
+
+            redWave.setAttribute("d", wavePath(112, noiseEnd, 452, amplitude, phase));
+            blueWave.setAttribute("d", wavePath(1155, antiEnd, 452, blueAmplitude, phase, true));
+            redWave.style.opacity = String(state.noise * (1 - state.cancel * .55));
+            blueWave.style.opacity = String(state.anti * (1 - state.cancel * .45));
+            moveDots(redDots, 112, noiseEnd, 452, amplitude, phase, state.noise);
+            moveDots(blueDots, 1155, antiEnd, 452, blueAmplitude, phase + Math.PI, state.anti);
+
+            revealClips.forEach(([clip, key, width]) => {
+                clip.setAttribute("width", (width * state[key]).toFixed(1));
+            });
+            sceneLayers.forEach(([layer, key]) => {
+                const reveal = state[key];
+                layer.style.opacity = String(reveal);
+                layer.style.filter = `blur(${((1 - reveal) * 12).toFixed(1)}px) saturate(${1 - state.cancel * .35})`;
+                const scaleTarget = sceneScaleTargets[key];
+                if (scaleTarget) {
+                    const scale = .85 + reveal * .15;
+                    const [x, y] = scaleTarget;
+                    layer.setAttribute("transform", `translate(${x} ${y}) scale(${scale}) translate(${-x} ${-y})`);
+                }
+            });
+            micWaveCover.style.opacity = String(1 - state.noise);
+
+            circuitDots.forEach((dot, index) => {
+                const angle = index * 2.399 + state.clock * .28;
+                const radius = 72 + (index % 4) * 13 + Math.sin(state.clock + index) * 5;
+                dot.setAttribute("cx", (1104 + Math.cos(angle) * radius).toFixed(1));
+                dot.setAttribute("cy", (448 + Math.sin(angle) * radius).toFixed(1));
+                dot.style.opacity = String(state.processor * (.35 + .45 * (Math.sin(state.clock * 2 + index) + 1) / 2));
+            });
+
+            const micPulse = state.mic * (.5 + .5 * Math.sin(phase * 1.5));
+            micRipple.setAttribute("r", String(18 + micPulse * 48));
+            micRipple.style.opacity = String(state.mic * (.18 + .5 * (1 - micPulse)));
+            headphoneGlow.style.opacity = String(.08 + state.activation * .3 + state.processor * .12);
+            headphoneGlow.setAttribute("stroke-width", String(.8 + state.activation * 1.5 + state.processor * .8));
+            headphoneGlow.setAttribute(
+                "transform",
+                `translate(0 ${(Math.sin(phase * .35) * 3).toFixed(2)}) rotate(${(Math.sin(phase * .24) * .35).toFixed(2)} 770 445)`
+            );
+            headphoneImage.setAttribute(
+                "transform",
+                `translate(0 ${(Math.sin(phase * .35) * 2).toFixed(2)}) rotate(${(Math.sin(phase * .24) * .18).toFixed(2)} 785 450)`
+            );
+            processorHalo.style.opacity = String(state.processor * (.35 + .25 * (Math.sin(phase) + 1) / 2));
+            processorHalo.setAttribute("r", String(78 + state.processor * (8 + 5 * Math.sin(phase))));
+            calmHalo.style.opacity = String(state.cancel * .55);
+            calmWash.style.opacity = String(state.cancel * .18);
+            background.style.filter = `saturate(${1 - state.cancel * .35}) brightness(${1 - state.cancel * .08})`;
+
+            topHud.style.opacity = String(state.ui);
+            bottomHud.style.opacity = String(state.ui);
+            if (isPlaying || completed) {
+                const phaseIndex = Math.min(4, Math.floor(state.phase));
+                if (phaseIndex !== lastPhase) {
+                    phaseLabel.textContent = phases[phaseIndex];
+                    lastPhase = phaseIndex;
+                }
+            }
+            progressLabel.firstChild.textContent = isPlaying
+                ? `${Math.round(state.progress * 100)}% COMPLETE `
+                : completed
+                    ? "SEQUENCE COMPLETE "
+                    : "HOVER HEADPHONES TO BEGIN ";
+        }
+
+        const timeline = gsap.timeline({
+            paused: true,
+            onUpdate: render,
+            onComplete: () => {
+                isPlaying = false;
+                completed = true;
+                render();
+            },
+        });
+
+        if (!reduceMotion) {
+            timeline
+                .to(state, { activation: 1, duration: timings.headphoneGlow, ease: "sine.out" }, 0)
+                .to(state, { ui: 1, duration: .3, ease: "sine.out" }, .05)
+                .to(state, { micReveal: 1, micLabel: 1, duration: timings.microphoneReveal, ease: "power2.out" }, .2)
+                .to(state, { leftSpeaker: 1, duration: timings.leftSpeakerReveal, ease: "power2.out" }, .4)
+                .to(state, { noiseLabel: 1, noise: 1, duration: timings.redNoiseTravel, ease: "sine.inOut" }, .6)
+                .to(state, { mic: 1, phase: 1, duration: timings.microphoneDetects, ease: "sine.inOut" }, 1.2)
+                .to(state, { processorReveal: 1, duration: timings.processorReveal, ease: "power2.out" }, 1.5)
+                .to(state, { processor: 1, phase: 2, duration: timings.processing, ease: "sine.inOut" }, 2)
+                .to(state, { antiReveal: 1, anti: 1, phase: 3, duration: timings.antiNoiseTravel, ease: "sine.inOut" }, 2.4)
+                .to(state, { rightSpeaker: 1, speakerLabel: 1, duration: timings.rightSpeakerReveal, ease: "power2.out" }, 3.2)
+                .to(state, { cancel: 1, phase: 4, duration: timings.cancellation, ease: "sine.inOut" }, 3.8)
+                .to(state, { progress: 1, duration: 4.5, ease: "none" }, 0);
+        } else {
+            timeline.to(state, {
+                leftSpeaker: 1, noiseLabel: 1, micReveal: 1, micLabel: 1,
+                processorReveal: 1, antiReveal: 1, rightSpeaker: 1, speakerLabel: 1,
+                noise: 1, mic: 1, processor: 1, anti: 1, cancel: 1,
+                activation: 1, ui: 1, progress: 1, phase: 4,
+                duration: 0,
+            });
+        }
+
+        function startSequence() {
+            lastPhase = -1;
+            phaseLabel.textContent = phases[0];
+            timeline.restart();
+        }
+
+        function playAnimation() {
+            if (isPlaying) return;
+            isPlaying = true;
+            completed = false;
+            if (reduceMotion) {
+                Object.assign(state, {
+                    leftSpeaker: 0, noiseLabel: 0, micReveal: 0, micLabel: 0,
+                    processorReveal: 0, antiReveal: 0, rightSpeaker: 0, speakerLabel: 0,
+                    noise: 0, mic: 0, processor: 0, anti: 0, cancel: 0,
+                    activation: 0, ui: 0, progress: 0, phase: 0,
+                });
+                render();
+                timeline.progress(0).progress(1);
+                return;
+            }
+
+            if (completed) {
+                gsap.to(state, {
+                    leftSpeaker: 0, noiseLabel: 0, micReveal: 0, micLabel: 0,
+                    processorReveal: 0, antiReveal: 0, rightSpeaker: 0, speakerLabel: 0,
+                    noise: 0, mic: 0, processor: 0, anti: 0, cancel: 0,
+                    activation: 0, ui: 0, progress: 0, phase: 0,
+                    duration: timings.reset,
+                    ease: "sine.inOut",
+                    onUpdate: render,
+                    onComplete: startSequence,
+                });
+            } else {
+                startSequence();
+            }
+        }
+
+        if (headphoneHotspot) {
+            headphoneHotspot.addEventListener("mouseenter", playAnimation);
+            headphoneHotspot.addEventListener("focus", playAnimation);
+            headphoneHotspot.addEventListener("click", playAnimation);
+        }
+
+        render();
+        gsap.ticker.add((_, deltaTime) => {
+            if (!reduceMotion) state.clock += deltaTime / 1000;
+            render();
+        });
+    }
+
+    /* ---------- Footer year ---------- */
+    const year = $("#year");
+    if (year) year.textContent = new Date().getFullYear();
+})();
