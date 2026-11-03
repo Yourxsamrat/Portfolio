@@ -456,6 +456,18 @@ nav {
    ABOUT
 ========================= */
 
+#about {
+    width: 100%;
+    max-width: none;
+    padding: 120px 4vw;
+    background: #111;
+    color: white;
+}
+
+#about .about-text > p {
+    color: #aaa;
+}
+
 .about-grid {
 
     display: grid;
